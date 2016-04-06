@@ -28,12 +28,13 @@ public class GameWindow {
   public  void show(Stage primaryStage) throws IOException{
 
     //setting field
-    gameRoot.setPrefSize(800, 600);
+    int height = 600, width = 800;
+    gameRoot.setPrefSize(width, height);
     InputStream is = Files.newInputStream(Paths.get("res/images/field_texture.jpg"));
     Image img = new Image(is);
     ImageView imgView = new ImageView(img);
-    imgView.setFitWidth(800);
-    imgView.setFitHeight(600);
+    imgView.setFitWidth(width);
+    imgView.setFitHeight(height);
 
     towerMenu = new TowerMenu();
     towerMenu.setVisible(true);
@@ -50,26 +51,32 @@ public class GameWindow {
   //tower buttons container
   private class TowerMenu extends Parent {
     public TowerMenu() throws IOException {
-      HBox menu0 = new HBox(0);
-      menu0.setTranslateX(50);
+
+      int distBetweenButtons = 0, menuTransX = 50;
+      HBox menu0 = new HBox(distBetweenButtons);
+      menu0.setTranslateX(menuTransX);
+
+      int imgWidth = 70;
 
       //skeleton archer tower
       InputStream is = Files.newInputStream(Paths.get("res/images/sarcher.png"));
       Image img = new Image(is);
       ImageView imgView = new ImageView(img);
-      imgView.setFitWidth(70);
+      imgView.setFitWidth(imgWidth);
+      Integer tower1Cost = 100;
       //set Height according to Width
       imgView.setPreserveRatio(true);
-      Button tower1 = new Button("100", imgView);
+      Button tower1 = new Button(tower1Cost.toString(), imgView);
       //display text below image
       tower1.setContentDisplay(ContentDisplay.TOP);			      
 
       is = Files.newInputStream(Paths.get("res/images/hellhound.png"));
       img = new Image(is);
       imgView = new ImageView(img);
-      imgView.setFitWidth(70);
+      imgView.setFitWidth(imgWidth);
       imgView.setPreserveRatio(true);
-      Button tower2 = new Button("150", imgView);
+      Integer tower2Cost = 150;
+      Button tower2 = new Button(tower2Cost.toString(), imgView);
       tower2.setContentDisplay(ContentDisplay.TOP);
 
       is.close();
@@ -91,36 +98,41 @@ public class GameWindow {
 
     public Scores_n_money() throws IOException {
       sm = new Pane();
+      int imgWidth = 50;
 
       //setting money picture
+      int moneyTransX = 620;
       InputStream is = Files.newInputStream(Paths.get("res/images/souls.png"));
       Image img = new Image(is);
       ImageView imgView = new ImageView(img);
-      imgView.setFitWidth(50);
+      imgView.setFitWidth(imgWidth);
       imgView.setPreserveRatio(true);
-      imgView.setTranslateX(620);
+      imgView.setTranslateX(moneyTransX);
 
       //setting scores picture
+      int scoresTransX = moneyTransX + 60;
       is = Files.newInputStream(Paths.get("res/images/score.png"));
       img = new Image(is);
       ImageView imgView2 = new ImageView(img);
-      imgView2.setFitWidth(50);
+      imgView2.setFitWidth(imgWidth);
       imgView2.setPreserveRatio(true);
-      imgView2.setTranslateX(680);
+      imgView2.setTranslateX(scoresTransX);
 
       is.close();
 
       scores = 0;
       money = 0;
 
-      //setting scores and money text
-      sc = new Text(680, 70, scores.toString());
-      sc.setFont(new Font(20));
-      sc.setFill(Color.GREY);
+      //setting money and scores text
+      int fontSize = 20, textTransY = 70;
 
-      m = new Text(620, 70, money.toString());
-      m.setFont(new Font(20));
+      m = new Text(moneyTransX, textTransY, money.toString());
+      m.setFont(new Font(fontSize));
       m.setFill(Color.GREY);
+
+      sc = new Text(scoresTransX, textTransY, scores.toString());
+      sc.setFont(new Font(fontSize));
+      sc.setFill(Color.GREY);
 
       sm.getChildren().addAll(imgView, imgView2, sc, m);
       getChildren().add(sm);

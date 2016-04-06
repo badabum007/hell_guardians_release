@@ -58,21 +58,22 @@ public class MainGameMenu extends Application {
     menuMp.play();
     MediaView mediaView = new MediaView(menuMp);
 
+    int height = 600, width = 800;
     //window size
-    root.setPrefSize(800, 600);
+    root.setPrefSize(width, height);
 
     //setting background
     InputStream is = Files.newInputStream(Paths.get("res/images/main_menu.png"));
     Image img = new Image(is);
     ImageView imgView = new ImageView(img);
-    imgView.setFitWidth(800);
-    imgView.setFitHeight(600);
+    imgView.setFitWidth(width);
+    imgView.setFitHeight(height);
 
     //disable window resize
-    theStage.setMinWidth(800);        
-    theStage.setMinHeight(600);
-    theStage.setMaxWidth(800);        
-    theStage.setMaxHeight(600);
+    theStage.setMinWidth(width);        
+    theStage.setMinHeight(height);
+    theStage.setMaxWidth(width);        
+    theStage.setMaxHeight(height);
 
     //initializing our menu
     gameMenu = new GameMenu();
@@ -92,11 +93,13 @@ public class MainGameMenu extends Application {
   //menu class
   private class GameMenu extends Parent {
     public GameMenu() throws FileNotFoundException {
-      VBox menu0 = new VBox(10);
+      int distBetweenButtons = 10;
+      VBox menu0 = new VBox(distBetweenButtons);
 
       //setting menu position
-      menu0.setTranslateX(550);
-      menu0.setTranslateY(450);
+      int menuTransX = 550, menuTransY = 450;
+      menu0.setTranslateX(menuTransX);
+      menu0.setTranslateY(menuTransY);
 
       MenuButton btnNewGame = new MenuButton("New game");
       btnNewGame.setOnMouseClicked(event -> {
@@ -133,30 +136,35 @@ public class MainGameMenu extends Application {
       text.setFill(Color.WHITE);
 
       //adding rectangle over button
-      Rectangle bg = new Rectangle(250, 30);
-      bg.setOpacity(0.5);
+      int rectWidth = 250, rectHeight = 30;
+      Rectangle bg = new Rectangle(rectWidth, rectHeight);
+      double opacityLevel = 0.5, blurLevel = 3.5;
+      bg.setOpacity(opacityLevel);
       bg.setFill(Color.BLACK);
-      bg.setEffect(new GaussianBlur(3.5));
+      bg.setEffect(new GaussianBlur(blurLevel));
 
       //setting effects
       setAlignment(Pos.CENTER_LEFT);
       getChildren().addAll(bg, text);
 
       setOnMouseEntered(event -> {
-        bg.setTranslateX(10);
-        text.setTranslateX(10);
+        int translateButtonForwardX = 10;
+        bg.setTranslateX(translateButtonForwardX);
+        text.setTranslateX(translateButtonForwardX);
         bg.setFill(Color.WHITE);
         text.setFill(Color.BLACK);
       });
 
       setOnMouseExited(event -> {
-        bg.setTranslateX(0);
-        text.setTranslateX(0);
+        int translateButtonBackwardX = 0;
+        bg.setTranslateX(translateButtonBackwardX);
+        text.setTranslateX(translateButtonBackwardX);
         bg.setFill(Color.BLACK);
         text.setFill(Color.WHITE);
       });
 
-      DropShadow drop = new DropShadow(50, Color.WHITE);
+      int dropShadowRange = 50;
+      DropShadow drop = new DropShadow(dropShadowRange, Color.WHITE);
       drop.setInput(new Glow());
 
       setOnMousePressed(event -> setEffect(drop));
