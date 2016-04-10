@@ -49,7 +49,8 @@ public class MainGameMenu extends Application {
     //menu content adding
 
     //adding music
-    Media media= new Media(new File("res/music/Gonzalo_Varela_-_06_-_Abandoned_Souls.mp3").toURI().toString());
+    Media media= new Media(new File
+    	("res/music/Gonzalo_Varela_-_06_-_Abandoned_Souls.mp3").toURI().toString());
     menuMp = new MediaPlayer(media);
     //autostart when program is launched
     menuMp.setAutoPlay(true);
