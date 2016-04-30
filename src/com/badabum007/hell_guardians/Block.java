@@ -56,6 +56,8 @@ public class Block extends Pane {
       this.setOnMouseClicked(event -> {
         Tower tower;
         try {
+          GameWindow.gameRoot.sMan.addToFile(GameWindow.gameRoot.sMan.tempFileName,
+              x + " " + y + " " + GameWindow.gameRoot.towerTime + "\n");
           tower = new Tower(x, y);
           GameWindow.gameRoot.towers.add(tower);
         } catch (Exception e) {

@@ -20,8 +20,8 @@ public class Tower extends Pane {
   ImageView imageView;
 
   /** tower position */
-  double posX;
-  double posY;
+  long posX;
+  long posY;
   double attackRange = MainGameMenu.width - GameWindow.offsetXY;
   public Shot shots;
   final double shootingCooldown = 10;
@@ -46,7 +46,7 @@ public class Tower extends Pane {
    * @param posY - tower Y position
    * @throws IOException
    */
-  public Tower(double x, double y) throws IOException {
+  public Tower(long x, long y) throws IOException {
     timeToShoot = 0;
 
     InputStream is = Files.newInputStream(Paths.get("res/images/sarcher_sprites.png"));

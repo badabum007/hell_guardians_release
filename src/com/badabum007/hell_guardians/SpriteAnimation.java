@@ -29,8 +29,7 @@ public class SpriteAnimation extends Transition {
 
   public SpriteAnimation(ImageView imageView,
       /** animation duration */
-      Duration duration, int count, int columns, int offsetX, int offsetY, 
-      int width, int height) {
+      Duration duration, int count, int columns, int offsetX, int offsetY, int width, int height) {
     this.imageView = imageView;
     this.count = count;
     this.columns = columns;

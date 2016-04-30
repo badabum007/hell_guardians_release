@@ -24,7 +24,7 @@ public class GameWindow {
   static GameRoot gameRoot = new GameRoot();
   private Scene gameScene;
   static Pane All;
-  
+
   int height = 600, width = 800;
 
   /**

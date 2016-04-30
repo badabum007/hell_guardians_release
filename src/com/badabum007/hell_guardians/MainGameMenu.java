@@ -7,6 +7,8 @@ import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
+import javax.swing.JFileChooser;
+
 import javafx.animation.TranslateTransition;
 import javafx.application.Application;
 import javafx.geometry.Pos;
@@ -120,7 +122,7 @@ public class MainGameMenu extends Application {
     final int offset = 800;
     double TransTtDur = 0.25;
     double TransTt1Dur = 0.5;
-    
+
     int damageHorror = 25;
     int damageNightmare = 20;
 
@@ -144,7 +146,6 @@ public class MainGameMenu extends Application {
       menu2.setTranslateY(menuTransY);
 
       MenuButton btnNewGame = new MenuButton("New game");
-
       btnNewGame.setOnMouseClicked(event -> {
         getChildren().add(menu1);
 
@@ -161,6 +162,30 @@ public class MainGameMenu extends Application {
         translateTransition.setOnFinished(evt -> {
           getChildren().remove(menu0);
         });
+      });
+
+      MenuButton btnRePlay = new MenuButton("Watch replay");
+      btnRePlay.setOnMouseClicked(event -> {
+        try {
+          JFileChooser dialog = new JFileChooser(new File("saves"));
+          dialog.setFileSelectionMode(JFileChooser.FILES_ONLY);
+          dialog.setApproveButtonText("Open");
+          dialog.setDialogTitle("Open save");
+          dialog.setDialogType(JFileChooser.OPEN_DIALOG);
+          dialog.setMultiSelectionEnabled(false);
+
+          if (dialog.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
+            SaveManager.loadGameSave = SaveManager.saveDir + dialog.getSelectedFile().getName();
+          } else {
+            return;
+          }
+          GameRoot.gameMode = "RePlay";
+          /** stop playing and change scene */
+          menuMp.stop();
+          gameWindow.show(theStage);
+        } catch (Exception e) {
+          e.printStackTrace();
+        }
       });
 
       MenuButton btnBack = new MenuButton("Back");
@@ -274,7 +299,7 @@ public class MainGameMenu extends Application {
         System.exit(0);
       });
 
-      menu0.getChildren().addAll(btnNewGame, btnExit);
+      menu0.getChildren().addAll(btnNewGame, btnRePlay, btnExit);
       getChildren().add(menu0);
 
       menu1.getChildren().addAll(btnBot, btnPlayer, btnBack);

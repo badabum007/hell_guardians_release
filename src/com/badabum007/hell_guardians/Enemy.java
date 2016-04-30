@@ -22,7 +22,8 @@ public class Enemy extends Pane {
   /** enemy position */
   public double posX;
   public double posY;
-  int health = 100;
+  int health;
+  static int healthMax = 100;
 
   final int width = 145;
   final int height = 100;
@@ -41,6 +42,9 @@ public class Enemy extends Pane {
    * @throws IOException
    */
   public Enemy(int posX, int posY) throws IOException {
+
+    health = healthMax;
+
     /** load enemy sprite and enable enemy animation */
     InputStream is = Files.newInputStream(Paths.get("res/images/hero_sprites.png"));
     Image img = new Image(is);

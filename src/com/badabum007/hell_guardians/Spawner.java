@@ -9,20 +9,20 @@ import java.util.ArrayList;
  * @author badabum007
  */
 public class Spawner {
-  /** summary spawned creatures number*/
+  /** summary spawned creatures number */
   int count;
 
   int startPosX;
   int startPosY;
 
-  /** unleashed monsters count*/
+  /** unleashed monsters count */
   int iterator;
 
-  /** list of all existing enemies from this spawner*/
+  /** list of all existing enemies from this spawner */
   ArrayList<Enemy> enemies;
 
   int X;
-  /** enemy step size*/
+  /** enemy step size */
   int enemyStepSize = 1;
 
   /**
