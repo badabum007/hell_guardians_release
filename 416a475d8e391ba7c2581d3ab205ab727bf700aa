@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "baa041b7_efabdf1b",
+        "filename": "src/com/badabum007/hell_guardians/GameRoot.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1007672
+      },
+      "writtenOn": "2016-05-01T20:48:59Z",
+      "side": 1,
+      "message": "long[][]",
+      "range": {
+        "startLine": 69,
+        "startChar": 1,
+        "endLine": 69,
+        "endChar": 24
+      },
+      "revId": "416a475d8e391ba7c2581d3ab205ab727bf700aa",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    }
+  ]
+}
