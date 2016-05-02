@@ -66,7 +66,7 @@ public class GameRoot extends Pane {
   long towerTime;
 
   /** save arguments from file */
-  long[][] argsFromFile;
+  long argsFromFile[][];
 
   /** number of strings in file */
   int maxStringCount = 0;
