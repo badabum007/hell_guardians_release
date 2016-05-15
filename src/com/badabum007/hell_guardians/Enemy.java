@@ -34,6 +34,9 @@ public class Enemy extends Pane {
   final int duration = 700;
   SpriteAnimation animation;
 
+  static InputStream is;
+  static Image img;
+
   /**
    * Creates an enemy at the pointed location
    * 
@@ -42,13 +45,8 @@ public class Enemy extends Pane {
    * @throws IOException
    */
   public Enemy(int posX, int posY) throws IOException {
-
     health = healthMax;
 
-    /** load enemy sprite and enable enemy animation */
-    InputStream is = Files.newInputStream(Paths.get("res/images/hero_sprites.png"));
-    Image img = new Image(is);
-    is.close();
     this.imageView = new ImageView(img);
     this.imageView.setViewport(new Rectangle2D(offsetX, offsetY, width, height));
     animation = new SpriteAnimation(imageView, Duration.millis(duration), count, columns, offsetX,
@@ -63,10 +61,18 @@ public class Enemy extends Pane {
     GameWindow.gameRoot.getChildren().add(this);
   }
 
+  public static void init() throws IOException {
+
+    /** load enemy sprite and enable enemy animation */
+    is = Files.newInputStream(Paths.get("res/images/hero_sprites.png"));
+    img = new Image(is);
+    is.close();
+  }
+
   /**
    * Enemy movement control
    * 
-   * @param x - number of steps to move (if x < 0 enemy moves from right to left)
+   * @param x - number of steps to move
    */
   public void moveX(double x) {
     this.setTranslateX(this.getTranslateX() - x);

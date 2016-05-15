@@ -23,7 +23,6 @@ public class Tower extends Pane {
   long posX;
   long posY;
   double attackRange = MainGameMenu.width - GameWindow.offsetXY;
-  public Shot shots;
   final double shootingCooldown = 10;
 
   /** time to next shot */
@@ -42,8 +41,8 @@ public class Tower extends Pane {
   /**
    * Build a tower
    * 
-   * @param posX - tower X position
-   * @param posY - tower Y position
+   * @param x - tower X position
+   * @param y - tower Y position
    * @throws IOException
    */
   public Tower(long x, long y) throws IOException {

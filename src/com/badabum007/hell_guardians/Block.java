@@ -17,19 +17,17 @@ import javafx.scene.shape.Line;
  */
 public class Block extends Pane {
   ImageView block;
-  Image img_block;
+  static Image img_block;
+  static InputStream is;
 
   /**
    * Creates a block in a specified point
    * 
    * @param x - X coordinate
    * @param y - Y coordinate
+   * @throws IOException
    */
   public Block(int x, int y) throws IOException {
-    /** block image adding */
-    InputStream is = Files.newInputStream(Paths.get("res/images/block.jpg"));
-    img_block = new Image(is);
-    is.close();
     block = new ImageView();
     block.setFitHeight(GameWindow.blockSize);
     block.setFitWidth(GameWindow.blockSize);
@@ -70,5 +68,17 @@ public class Block extends Pane {
      */
     getChildren().add(block);
     GameWindow.gameRoot.getChildren().add(this);
+  }
+  
+  public static void init(){
+    /** block image adding */
+    try {
+      is = Files.newInputStream(Paths.get("res/images/block.jpg"));
+      img_block = new Image(is);
+      is.close();
+    } catch (IOException e) {
+      // TODO Auto-generated catch block
+      e.printStackTrace();
+    }
   }
 }

@@ -45,6 +45,12 @@ public class Bot {
       coordY = (int) (new Random().nextInt(GameRoot.rows));
       coordX = (int) (new Random().nextInt(GameRoot.columns));
     } while (towerMap[coordY][coordX] == true);
+    for (int i = 0 ; i < coordX; i ++){
+      if (towerMap[coordY][i] == false){
+        coordX = i;
+        break;
+      }
+    }
     towerMap[coordY][coordX] = true;
 
     Tower tower = new Tower(coordX * GameWindow.blockSize + GameWindow.offsetXY,
