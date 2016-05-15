@@ -72,7 +72,7 @@ public class GameRoot extends Pane implements Runnable {
 
   int botFastestTime = 50;
   int botRandomPart = 500;
-
+ 
   /** RePlay file */
   File saveFile;
 

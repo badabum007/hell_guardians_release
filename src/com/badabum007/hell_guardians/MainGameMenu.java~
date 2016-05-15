@@ -38,7 +38,7 @@ import javafx.util.Duration;
  * @author badabum007
  */
 public class MainGameMenu extends Application {
-   
+  
   public Thread mainThread;
   /** define the stage as public for communication between interface classes */
   public Stage theStage;
