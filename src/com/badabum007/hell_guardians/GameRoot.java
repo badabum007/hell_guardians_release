@@ -72,7 +72,7 @@ public class GameRoot extends Pane implements Runnable {
 
   int botFastestTime = 50;
   int botRandomPart = 500;
- 
+
   /** RePlay file */
   File saveFile;
 
@@ -86,7 +86,7 @@ public class GameRoot extends Pane implements Runnable {
   int maxStringCount = 0;
 
   SaveManager sMan;
-  String tempFileName = "saves/logs.txt";
+  String tempFileName = "logs.txt";
 
   int argsCount = 3;
   int counter;
@@ -103,7 +103,7 @@ public class GameRoot extends Pane implements Runnable {
   int damageHorror = 25;
   int damageNightmare = 20;
 
-  Iterator<Shot> iter;
+  public Iterator<Shot> iter;
 
   Shot tempShot;
 
@@ -212,17 +212,21 @@ public class GameRoot extends Pane implements Runnable {
         BufferedReader reader = new BufferedReader(new FileReader(SaveManager.loadGameSave));
         String line;
         maxStringCount = 0;
+        /** read time and money for statistics*/
         Shot.damage = Integer.parseInt(reader.readLine());
         /** Counting string count for array memory allocation */
         while ((line = reader.readLine()) != null) {
           maxStringCount++;
         }
+        //System.out.println(maxStringCount);
         reader.close();
 
         reader = new BufferedReader(new FileReader(SaveManager.loadGameSave));
         argsFromFile = new long[maxStringCount][argsCount];
+        /** skip statistics */
         reader.readLine();
         while ((line = reader.readLine()) != null) {
+          //System.out.println(line);
           args = line.split(" ");
           for (int i = 0; i < argsCount; i++) {
             argsFromFile[counter][i] = Integer.parseInt(args[i]);
@@ -335,7 +339,7 @@ public class GameRoot extends Pane implements Runnable {
                 this.stop();
                 is.close();
                 if (gameMode != "RePlay") {
-                  sMan.createSaveFile();
+                  sMan.createSaveFile(towers.size());
                 }
                 AnimationTimer exitTimer = new AnimationTimer() {
                   long exitClock = 0;
@@ -431,7 +435,7 @@ public class GameRoot extends Pane implements Runnable {
               towers.get(k).timeToShoot = towers.get(k).shootingCooldown;
               try {
                 shots.add(
-                    new Shot(spawn[i].enemies.get(j), towers.get(k).posX + GameWindow.blockSize / 2,
+                    new Shot(spawn[i], towers.get(k).posX + GameWindow.blockSize / 2,
                         towers.get(k).posY + GameWindow.blockSize / 2));
               } catch (IOException e) {
                 // TODO Auto-generated catch block

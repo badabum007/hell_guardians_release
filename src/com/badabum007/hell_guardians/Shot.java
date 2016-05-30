@@ -40,6 +40,7 @@ public class Shot {
   final int stepSize = 5;
   Enemy targetEnemy;
 
+  Spawner spawner;
   /** shot path */
   Path shotPath;
   PathTransition animation;
@@ -51,7 +52,9 @@ public class Shot {
    * @param startX - start X coordinate
    * @param startY - start Y coordinate
    */
-  public Shot(Enemy target, double startX, double startY) throws IOException {
+  public Shot(Spawner spawn, double startX, double startY) throws IOException {
+    spawner = spawn;
+    targetEnemy = spawn.enemies.get(0);
     imageView = new ImageView(img);
     imageView.setViewport(new Rectangle2D(offsetX, offsetY, width, height));
     imageView.setRotate(rotationDegree);
@@ -63,12 +66,20 @@ public class Shot {
   }
 
   public int update() {
+    if (spawner.enemies.isEmpty() ){
+      imageView.setVisible(false);
+      GameWindow.gameRoot.getChildren().remove(imageView);
+      GameWindow.gameRoot.getChildren().remove(this);
+      return -1;
+    }
+    targetEnemy = spawner.enemies.get(0);
     imageView.setTranslateX(imageView.getTranslateX() + stepSize);
     if (imageView.getTranslateX() > targetEnemy.posX) {
       targetEnemy.getDamage(damage);
       imageView.setVisible(false);
       GameWindow.gameRoot.getChildren().remove(imageView);
       GameWindow.gameRoot.getChildren().remove(this);
+      
       return -1;
     }
     return 0;
