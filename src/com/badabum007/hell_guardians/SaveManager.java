@@ -28,6 +28,7 @@ public class SaveManager {
   int dataArraySize = 2;
   int filesToGen = 10;
   String tempName = "logs";
+  int rndValue = 10000;
 
   SaveManager(String name) {
     tempFileName = name;
@@ -83,7 +84,7 @@ public class SaveManager {
   public void createSaveFile(int size) throws IOException {
     String fileName =
         saveDir + new SimpleDateFormat(dateFormat).format(Calendar.getInstance().getTime()) + "_"
-            + size + extension;
+            + size + "_" +((Integer)(new Random().nextInt(rndValue))) + extension;
     File file = new File(fileName);
     try {
       file.createNewFile();
@@ -223,11 +224,13 @@ public class SaveManager {
     boolean[][] towerMap = new boolean[GameRoot.rows][GameRoot.columns];
 
     for (int saveCounter = 0; saveCounter < filesToGen; saveCounter++) {
+      
       for (int i = 0; i < GameRoot.rows; i++) {
         for (int j = 0; j < GameRoot.columns; j++) {
           towerMap[i][j] = false;
         }
       }
+      
       currentCount = 0;
       time = 0;
       Shot.damage = 25;
@@ -263,6 +266,7 @@ public class SaveManager {
           break;
         }
       }
+      
       try {
         createSaveFile(currentCount);
       } catch (IOException e) {

@@ -47,18 +47,21 @@ public class MainGameMenu extends Application {
   /** create object for our buttons */
   private GameMenu gameMenu;
   /** layout for our title screen menu */
-  private Pane root;
+  public static Pane root;
   /** object of our class for all gaming stuff */
   public GameWindow gameWindow;
   /** music player object */
   private MediaPlayer menuMp;
   /** our stage parameters */
   public final static int height = 600, width = 800;
+  
+  Statistic stat = new Statistic();
 
   @Override
   public void start(Stage primaryStage) throws Exception {
 
-    // saveMan.generateSaves(100000);
+    //generate saves
+    //saveMan.generateSaves(500);
 
     mainThread = Thread.currentThread();
     root = new Pane();
@@ -123,7 +126,7 @@ public class MainGameMenu extends Application {
 
     final int distBetweenButtons = 10;
     /** setting menu position */
-    final int menuTransX = 550, menuTransY = 350;
+    final int menuTransX = 550, menuTransY = 300;
     /** offset for shuffling when menu is changed */
     final int offset = 800;
     double TransTtDur = 0.25;
@@ -245,6 +248,15 @@ public class MainGameMenu extends Application {
           e.printStackTrace();
         }
       });
+      
+      MenuButton btnStats = new MenuButton( "Statistics");
+      btnStats.setOnMouseClicked(event -> {
+        try {
+          stat.showStatistic();
+        } catch (Exception e) {
+          e.printStackTrace();
+        }
+      });
 
       MenuButton btnBack = new MenuButton("Back");
       btnBack.setOnMouseClicked(event -> {
@@ -357,7 +369,7 @@ public class MainGameMenu extends Application {
         System.exit(0);
       });
 
-      menu0.getChildren().addAll(btnNewGame, btnRePlay, btnJSort, btnSSort, btnExit);
+      menu0.getChildren().addAll(btnNewGame, btnRePlay, btnJSort, btnSSort, btnStats, btnExit);
       getChildren().add(menu0);
 
       menu1.getChildren().addAll(btnBot, btnPlayer, btnBack);
