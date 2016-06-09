@@ -5,15 +5,13 @@ import scala.collection.mutable.Set
 import scala.collection.mutable.Seq
 import scala.collection.mutable.MutableList
 
-class SList {
-  val tempList: MutableList[Double] = MutableList()
+class SNotList {
+  val tempList: MutableList[Int] = MutableList()
 
-  def addEl(element: Double) {
+  def addEl(element: Int) {
     tempList.+=(element)
   }
 
-  def ret(): java.util.List[Double] = {
-    JavaConversions.mutableSeqAsJavaList(tempList)
-  }
-  
+  def ret() :java.util.List[Int] = JavaConversions.mutableSeqAsJavaList(tempList)
+
 }

@@ -29,7 +29,7 @@ public class Statistic {
   int sum;
 
   /** Для округления */
-  final static int ROUND = 100;
+  final static int round = 100;
 
   int averageTime;
 
@@ -55,7 +55,6 @@ public class Statistic {
       }
     }
 
-    getStatisticNumbers();
   }
 
   /**
@@ -104,6 +103,7 @@ public class Statistic {
    * Метод реализует вывод статистики на экран
    */
   public void showStatistic() {
+    getStatisticNumbers();
     VBox vbox = new VBox();
     vbox.setTranslateX(offsX);
     vbox.setTranslateY(offsY);
@@ -121,11 +121,11 @@ public class Statistic {
         
         obj = lIter.next();
         color = (double) obj / max;
-        temp = (double) obj / sum * ROUND;
+        temp = (double) obj / sum * round;
         int tempValue = (int) temp;
         
-        temp = (double) tempValue / ROUND;
-        Text boxText = new Text(Double.toString(temp * ROUND) + "%");
+        temp = (double) tempValue / round;
+        Text boxText = new Text(Double.toString(temp * round) + "%");
         boxText.setFill(Color.WHITE);
         Rectangle bg = new Rectangle(GameWindow.blockSize / 2, GameWindow.blockSize / 2);
         bg.setFill(Color.color(0.0, color, 0.0));

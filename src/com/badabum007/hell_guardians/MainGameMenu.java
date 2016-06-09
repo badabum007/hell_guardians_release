@@ -126,7 +126,7 @@ public class MainGameMenu extends Application {
 
     final int distBetweenButtons = 10;
     /** setting menu position */
-    final int menuTransX = 550, menuTransY = 300;
+    final int menuTransX = 550, menuTransY = 280;
     /** offset for shuffling when menu is changed */
     final int offset = 800;
     double TransTtDur = 0.25;
@@ -194,6 +194,33 @@ public class MainGameMenu extends Application {
           /** stop playing and change scene */
           menuMp.stop();
           gameWindow.show(theStage);
+        } catch (Exception e) {
+          e.printStackTrace();
+        }
+      });
+      
+      MenuButton btnReadNotation = new MenuButton("Read Notation");
+      btnReadNotation.setOnMouseClicked(event -> {
+        try {
+
+          /** file choose dialog */
+          FileFilter filter = new FileNameExtensionFilter("Hell guardians saves", "sav");
+          JFileChooser dialog = new JFileChooser(new File("saves"));
+          dialog.setFileSelectionMode(JFileChooser.FILES_ONLY);
+          dialog.setApproveButtonText("Open");
+          dialog.setDialogTitle("Open save");
+          dialog.setDialogType(JFileChooser.OPEN_DIALOG);
+          dialog.setFileFilter(filter);
+          dialog.setMultiSelectionEnabled(false);
+
+          if (dialog.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
+            SaveManager.loadGameSave = SaveManager.saveDir + dialog.getSelectedFile().getName();
+            SaveManager.showSaveNotation();
+            
+          } else {
+            return;
+          }
+
         } catch (Exception e) {
           e.printStackTrace();
         }
@@ -369,7 +396,7 @@ public class MainGameMenu extends Application {
         System.exit(0);
       });
 
-      menu0.getChildren().addAll(btnNewGame, btnRePlay, btnJSort, btnSSort, btnStats, btnExit);
+      menu0.getChildren().addAll(btnNewGame, btnRePlay, btnJSort, btnSSort, btnStats, btnReadNotation, btnExit);
       getChildren().add(menu0);
 
       menu1.getChildren().addAll(btnBot, btnPlayer, btnBack);

@@ -276,5 +276,34 @@ public class SaveManager {
     }
 
   }
+  
+  
+  public static void showSaveNotation(){
+    SNotList listNScala = new SNotList();
+    int argsCount = 3;
+      try {
+        String[] args = new String[argsCount];
+        BufferedReader reader;
+        String line;
+        
+
+        reader = new BufferedReader(new FileReader(SaveManager.loadGameSave));
+        listNScala.addEl( Integer.parseInt(reader.readLine()));
+        while ((line = reader.readLine()) != null) {
+          //System.out.println(line);
+          args = line.split(" ");
+          for (int i = 0; i < argsCount; i++) {
+            listNScala.addEl( Integer.parseInt(args[i]));
+          }
+        }
+        reader.close();
+        
+        NotationReader nReader = new NotationReader();
+        nReader.read(listNScala.ret());
+      } catch (IOException e) {
+        e.printStackTrace();
+      }
+    
+  }
 
 }
